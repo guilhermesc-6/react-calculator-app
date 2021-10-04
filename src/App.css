@@ -1,38 +1,237 @@
+/* themes configuration */
+.App[data-theme=default] {
+  --main-background: hsl(222, 26%, 31%);
+  --toggle-keypad-background: hsl(223, 31%, 20%);
+  --screen-background: hsl(224, 36%, 15%);
+
+  /* KEYS */
+
+  --del-key-background: hsl(225, 21%, 49%);
+  --del-key-shadow: hsl(224, 28%, 35%);
+
+  --equal-key-background: hsl(6, 63%, 50%);
+  --equal-key-shadow: hsl(6, 70%, 34%);
+
+  --key-background: hsl(30, 25%, 89%);
+  --key-shadow: hsl(28, 16%, 65%);
+
+  /* TEXT */
+  --screen-text: white;
+  --keys-text: hsl(221, 14%, 31%);
+  --action-text: white;
+  --equal-text: white;
+}
+
+.App[data-theme=light]{
+  --main-background: hsl(0, 0%, 90%);
+  --toggle-keypad-background: hsl(0, 5%, 81%);
+  --screen-background: hsl(0, 0%, 93%);
+
+  /* KEYS */
+
+  --del-key-background: hsl(185, 42%, 37%);
+  --del-key-shadow: hsl(185, 58%, 25%);
+
+  --equal-key-background: hsl(25, 98%, 40%);
+  --equal-key-shadow: hsl(25, 99%, 27%);
+
+  --key-background: hsl(45, 7%, 89%);
+  --key-shadow: hsl(35, 11%, 61%);
+
+  /* TEXT */
+
+  --screen-text: hsl(60, 10%, 19%);
+  --keys-text: hsl(0, 0, 100%);
+  --action-text: white;
+  --equal-text: white;
+
+}
+.App[data-theme=dark]{
+  --main-background: hsl(268, 75%, 9%);
+  --toggle-keypad-background: hsl(268, 71%, 12%);
+  --screen-background: hsl(268, 71%, 12%);
+
+  /* KEYS */
+
+  --del-key-background: hsl(281, 89%, 26%);
+  --del-key-shadow: hsl(285, 91%, 52%);
+
+  --equal-key-background: hsl(176, 100%, 44%);
+  --equal-key-shadow: hsl(177, 92%, 70%);
+
+  --key-background: hsl(268, 47%, 21%);
+  --key-shadow: hsl(290, 70%, 36%);
+
+  /* TEXT */
+
+  --screen-text: hsl(52, 100%, 62%);
+  --equal-text: hsl(198, 20%, 13%);
+  --keys-text: hsl(52, 100%, 62%);
+  --action-text:white;
+}
+
+/* Elements styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  font-family: "Spartan", sans-serif;
+  font-size: 32px;
   display: flex;
+  justify-content: center;
   flex-direction: column;
   align-items: center;
+  min-height: 100vh;
+  background: var(--main-background);
+  transition: background 0.2s ease-in;
+}
+.calculator {
+  width: 30vw;
+}
+
+header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 2rem;
+  color: var(--screen-text);
+  transition: color 0.2s ease-in-out;
+}
+
+header .themeSwitcher {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+  transition: color 0.2s ease-in-out;
+}
+.themeSwitcher .labelBox,.themeSwitcher .sliderContainer{
+  display: flex;
+}
+.themeSwitcher .labelBox{
+  justify-content: end;
+  gap:25px;
+  margin-bottom: 5px;
+}
+.themeSwitcher .sliderContainer {
+  display:flex;
+  align-items: center;
+}
+.themeSwitcher .sliderContainer p{
+  margin-right: 15px;
+  text-transform: uppercase;
+}
+.themeSwitcher .sliderContainer input{
+  appearance: none;
+  width: 80px;
+  height: 25px;
+  padding: 0 0.3rem;
+  border-radius: 14px;
+  outline: none;
+  cursor: pointer;
+  background-color: var(--toggle-keypad-background);
+  
+}
+.themeSwitcher .sliderContainer input::-moz-range-thumb {
+  width: 15px;
+  height: 15px;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--equal-key-background);
+}
+
+
+.display {
+  background: var(--screen-background);
+  width: 100%;
+  height: 80px;
+  border-radius: 10px;
+  margin: 20px 0;
+  color: var(--screen-text);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 15px;
+  cursor: not-allowed;
+  transition: all 0.2s ease-in-out;
+}
+
+/* CALCULATOR KEYPAD */
+.keypad {
+  display: grid;
+  place-items: center;
+  grid-template-columns: repeat(4, minmax(5rem, 1fr));
+  row-gap: 20px;
+  background: var(--toggle-keypad-background);
+  padding: 20px 10px;
+  border-radius: 10px;
+}
+
+.keypad .keys {
+  width: 5rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  border-radius: 8px;
+  color: var(--keys-text);
+  background: var(--key-background);
+  box-shadow: 0 4px 0 var(--key-shadow);
+  cursor: pointer;
+  border: none;
+  font-size: 2rem;
 }
 
-.App-link {
-  color: #61dafb;
+.keypad .action {
+  background: var(--del-key-background);
+  box-shadow: 0 4px 0 var(--del-key-shadow);
+  text-transform: uppercase;
+  color: var(--action-text);
+  font-size: 1.2rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.keypad .action.reset {
+  width: 10rem;
+}
+
+.keypad .keys.equal {
+  width: 10rem;
+  background: var(--equal-key-background);
+  box-shadow: 0 4px 0 var(--equal-key-shadow);
+  color: var(--equal-text);
+}
+.keypad .reset {
+  transform: translateX(40px);
+}
+.keypad .equal {
+  transform: translateX(155px);
+}
+
+/* media queries */
+@media screen and (max-width: 1300px) {
+  .calculator{
+    width:40%;
   }
-  to {
-    transform: rotate(360deg);
+}
+
+@media screen and (max-width:970px){
+  .calculator{
+    width: 60%;
+  }
+}
+
+@media screen and (max-width:640px){
+  .calculator{
+    width: 100%;
+    padding:5px;
+  }
+  header{
+    font-size: 2rem;
+  }
+  .keypad .equal {
+    transform: translateX(140px);
   }
 }
